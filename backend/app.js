@@ -5,10 +5,9 @@ import userRoutes from './routes/user.routes.js'
 import cookieParser from 'cookie-parser';
 import connect from './db/db.js';
 
+connect();
 
 const app = express();
-
-connect();
 
 app.use(cors())
 app.use(morgan("dev"));
