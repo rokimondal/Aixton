@@ -18,8 +18,19 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
+        required: true,
         select: false,
-    }
+    },
+    projects: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Project',
+        default: []
+    }],
+    requests: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Project',
+        default: []
+    }],
 });
 
 userSchema.statics.hashPassword = async function (password) {
@@ -31,9 +42,9 @@ userSchema.methods.isValidPassword = async function (password) {
 }
 
 userSchema.methods.generateJWT = async function () {
-    return jwt.sign({ email: this.email }, process.env.JWT_SECRET, {expiresIn: '24h'});
+    return jwt.sign({ email: this.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
 }
 
-const user = mongoose.model('user', userSchema);
+const user = mongoose.model('User', userSchema);
 
 export default user;
