@@ -16,6 +16,11 @@ const projectSchema = mongoose.Schema({
         ref: 'User',
         default: []
     }],
+    requests: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        default: []
+    }],
     fileTree: {
         type: Object,
         default: {}
